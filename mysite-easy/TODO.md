@@ -1,0 +1,1 @@
+- write a README.md explaining where in the django app tutorial this starts

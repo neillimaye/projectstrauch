@@ -1,0 +1,18 @@
+<!-- This is a template for making views in HTML. -->
+<!-- This uses python code embedded between braces within HTML tags -->
+{% load static %}
+<!-- The line above is for loading everything that the Django static module can find --> 
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+
+
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        <!--changed from "/polls/{{question.id}}/", new code looks up 'detail' in the urls and puts in the question id -->
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}

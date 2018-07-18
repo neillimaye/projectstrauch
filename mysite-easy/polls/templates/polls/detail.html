@@ -1,0 +1,19 @@
+<!-- detail.html template  -->
+
+<h1>{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+  <!--  set the form action to POST into the polls for the URL-->
+{% csrf_token %}
+<!--  This uses the cross-site-request-forgery prevention token system built into Django -->
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <!-- one radio button with the value set to the choice's id, names each button choice,  -->
+    <!--  forloop.counter references the current loop count -->
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+<!-- 'submit' inputs trigger the form action I'm guessing -->
+</form>
